@@ -82,7 +82,11 @@ create table attendance_logs (
 		on delete cascade
 );  
 
-
+select * from attendance_sessions;
+select * from attendance_logs;
+delete from attendance_sessions;
+delete from attendance_logs;
+drop table attendance_logs;
 
 INSERT INTO courses (course_name, professor_id, semester)
 VALUES ('블록체인개론', 1, '2025-1학기');
@@ -93,5 +97,7 @@ VALUES (1, 1, '09:00:00', '10:15:00', 'IT관 101호');
 
 INSERT INTO enrollments (course_id, student_id)
 VALUES (1, 1);
+INSERT INTO enrollments (course_id, student_id)
+VALUES (1, 2);
 
 select * from attendance_logs;
