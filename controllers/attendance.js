@@ -102,17 +102,17 @@ exports.submitAttendance = async (req, res) => {
     }
 
     // 서명 검증: reconstruct message
-    // const message = `${studentId}-${courseId}-${mysqlDatetime}`;
-    // console.log(message);
-    // const recoveredAddress = ethers
-    //   .verifyMessage(message, signed_data)
-    //   .toLowerCase();
+    const message = `${studentId}-${courseId}-${mysqlDatetime}`;
+    console.log(message);
+    const recoveredAddress = ethers
+      .verifyMessage(message, signed_data)
+      .toLowerCase();
 
-    // if (recoveredAddress !== wallet_address.toLowerCase()) {
-    //   return res
-    //     .status(403)
-    //     .json({ success: false, message: '서명 검증 실패' });
-    // }
+    if (recoveredAddress !== wallet_address.toLowerCase()) {
+      return res
+        .status(403)
+        .json({ success: false, message: '서명 검증 실패' });
+    }
 
     // 출석 세션 조회
     const [sessions] = await db.query(
